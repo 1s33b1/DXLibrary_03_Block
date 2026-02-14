@@ -1,1 +1,4 @@
 # DXLibrary_03_Block
+
+Sourceファイルにはゲームを実行するためのファイルを格納している。
+GameParameterには画面サイズのみが記述している。定数的なものが必要な時にGameParameterに書くようにしたい。

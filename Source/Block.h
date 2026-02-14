@@ -4,10 +4,12 @@ class Block
 {
 public:
 	Block();
-	~Block();
+	//~Block();
 	void Update();
-	void Draw(int blockX1, int blockY1, int blockX2, int blockY2);
-private:
+	void Draw(int x1, int y1, int x2, int y2);
 	int blockPosX, blockPosY;
+	int width, height;
+
+private:
 };
 

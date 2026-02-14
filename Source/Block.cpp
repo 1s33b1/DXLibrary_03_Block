@@ -8,10 +8,9 @@ Block::Block() {
 
 void Block::Update() 
 {
-	//if(CheckHitKey())
 }
 
-void Block::Draw(int blockX1, int blockY1, int blockX2, int blockY2)
+void Block::Draw(int x1, int y1, int x2, int y2)
 {
-	DrawBox(0, 0, 100, 100, GetColor(255, 0, 0), TRUE);
+	DrawBox(x1, y1, x2, y2, GetColor(255, 0, 0), TRUE);
 }

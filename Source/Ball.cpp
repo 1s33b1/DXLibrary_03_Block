@@ -13,8 +13,14 @@ Ball::Ball()
 }
 
 // 更新処理
-void Ball::Update(Block& pBlock)
+void Ball::Update(Block* pBlock[])
 {
+	// 40個のブロックに対してチェック
+	for (int i = 0; i < 40; i++) {
+		if (pBlock[i]->isExist == false) continue;
+
+
+	}
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		x -= ballSpeed;

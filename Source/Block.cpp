@@ -2,15 +2,29 @@
 #include "Block.h"
 
 // コンストラクタ
-Block::Block() {
-
+Block::Block() 
+{
+	color = GetColor(colorR, colorG, colorB); // 最初は紫っぽい色にする
 }
 
-void Block::Update() 
+void Block::Update(Block* pBlocks[])
 {
+	if (colorR >= 255) {
+		colorR = 0;
+	}
+	if (colorG >= 255) {
+		colorG = 0;
+	}
+	if (colorB >= 255) {
+		colorB = 0;
+	}
+	color = GetColor(colorR, colorG, colorB);
+	colorR += 10;
+	colorG += 10;
+	colorB += 10;
 }
 
-void Block::Draw(int x1, int y1, int x2, int y2)
+void Block::Draw()
 {
-	DrawBox(x1, y1, x2, y2, GetColor(255, 0, 0), TRUE);
+	DrawBox(blockPosX, blockPosY, blockPosX + width, blockPosY + height, color, TRUE);
 }

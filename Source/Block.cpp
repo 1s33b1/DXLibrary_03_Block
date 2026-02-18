@@ -9,19 +9,28 @@ Block::Block()
 
 void Block::Update(Block* pBlocks[])
 {
-	if (colorR >= 255) {
+	if (colorR >= 255 && !isExist) {
 		colorR = 0;
 	}
-	if (colorG >= 255) {
+	if (colorG >= 255 && !isExist) {
 		colorG = 0;
 	}
-	if (colorB >= 255) {
+	if (colorB >= 255 && !isExist) {
 		colorB = 0;
 	}
 	color = GetColor(colorR, colorG, colorB);
 	colorR += 10;
 	colorG += 10;
 	colorB += 10;
+
+	// ƒ{[ƒ‹‚ª“–‚½‚Á‚½‚Æ‚«‚Ì‚»‚ÌŒã‚Ìˆ—
+	if (isExist == true) {
+		// ¡‚Ì‚Æ‚±‚ë‚Í•F‚É‚µ‚ÄŒ©‚¦‚È‚¢‚æ‚¤‚É‚µ‚æ‚¤‚Æ‚µ‚Ä‚é
+		colorR = 0;
+		colorG = 0;
+		colorB = 0;
+
+	}
 }
 
 void Block::Draw()

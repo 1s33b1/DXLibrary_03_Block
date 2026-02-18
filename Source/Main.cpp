@@ -29,7 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	for (int y = 0; y < ROW; y++) {
 		for (int x = 0; x < COLUMN; x++) {
 			int index = y * COLUMN + x;
-			pBlocks[index] = new Block();
+			pBlocks[index] = new Block(); // インスタンスを生成したときにブロックの情報をポインタ配列の中に保存している
 
 			// Block.cppに場所を知らせる
 			pBlocks[index]->blockPosX = OFFSET_X + x * (B_WIDTH + GAP);
@@ -46,10 +46,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			// 配列に入っているポインタがnullじゃなければ
 			if (pBlocks[i] != nullptr) {
 				pBlocks[i]->Draw();
+
 				pBlocks[i]->Update(pBlocks);
 			}
 		}
 		pBall->Draw();
+
+		// そしてボールにはブロックのポインタ配列を渡しており、ボールのUpdateでforループをさせて
+		// ブロック配列にあるインスタンスを見に行き、座標を確認したり、サイズが書いているからそこから当たり判定をさせる。
 		pBall->Update(pBlocks);
 
 		WaitTimer(50); // 待機時間

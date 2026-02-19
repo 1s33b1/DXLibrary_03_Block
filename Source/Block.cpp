@@ -4,7 +4,7 @@
 // コンストラクタ
 Block::Block() 
 {
-	color = GetColor(colorR, colorG, colorB); // 最初は紫っぽい色にする
+	color = GetColor(colorR, colorG, colorB);
 }
 
 void Block::Update(Block* pBlocks[])
@@ -29,7 +29,6 @@ void Block::Update(Block* pBlocks[])
 		colorR = 0;
 		colorG = 0;
 		colorB = 0;
-
 	}
 }
 

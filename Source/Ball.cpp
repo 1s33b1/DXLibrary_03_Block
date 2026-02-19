@@ -37,20 +37,28 @@ void Ball::Update(Block* pBlock[])
 			vx *= -1;
 			break; // 二個破壊させないように処理を終了させる
 		}
-
 	}
 
 	// それぞれの移動速度に壁にぶつかったとき用のvx,vyを掛ける
 	//ballPosx = ballSpeed * vx;
 	//ballPosy = ballSpeed * vy;
 
+	// else ifだと1つのキーだけじゃないとダメだったからifに変更
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		ballPosx -= ballSpeed;
 	}
-	else if (CheckHitKey(KEY_INPUT_RIGHT))
+	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
 		ballPosx += ballSpeed;
+	}
+	if (CheckHitKey(KEY_INPUT_UP))
+	{
+		ballPosy -= ballSpeed;
+	}
+	if (CheckHitKey(KEY_INPUT_DOWN))
+	{
+		ballPosy += ballSpeed;
 	}
 }
 

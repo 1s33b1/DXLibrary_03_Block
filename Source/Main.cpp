@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Block* pBlocks[COLUMN * ROW];
 	Ball* pBall;
 
-	// ＤＸライブラリ初期化処理
+	// DXライブラリ初期化処理
 	if (DxLib_Init() == -1) return -1;
 	SetGraphMode(ScreenSettings::screenWidth, ScreenSettings::screenHeight, 30); // 画面のサイズを決定
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -36,8 +36,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			pBlocks[index]->blockPosY = OFFSET_Y + y * (B_HEIGHT + GAP);
 		}
 	}
-	pBall = new Ball();
+	pBall = new Ball(); // ボールインスタンス
 		
+	// メインのループ処理
+	//----------------------------------------------------------------
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		ClearDrawScreen(); // 画面をまっさらに
@@ -46,12 +48,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			// 配列に入っているポインタがnullじゃなければ
 			if (pBlocks[i] != nullptr) {
 				pBlocks[i]->Draw();
-
 				pBlocks[i]->Update(pBlocks);
 			}
 		}
-		pBall->Draw();
 
+		pBall->Draw();
 		// そしてボールにはブロックのポインタ配列を渡しており、ボールのUpdateでforループをさせて
 		// ブロック配列にあるインスタンスを見に行き、座標を確認したり、サイズが書いているからそこから当たり判定をさせる。
 		pBall->Update(pBlocks);

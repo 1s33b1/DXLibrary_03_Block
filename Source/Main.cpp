@@ -2,6 +2,7 @@
 #include "../GameParameter.h"
 #include "Block.h"
 #include "Ball.h"
+#include "Player.h"
 
 /// <summary>
 /// ブロック崩し
@@ -19,6 +20,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	const int OFFSET_Y = 50; // 上端の余白
 	Block* pBlocks[COLUMN * ROW];
 	Ball* pBall;
+	Player player;
 
 	// DXライブラリ初期化処理
 	if (DxLib_Init() == -1) return -1;
@@ -37,7 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 	pBall = new Ball(); // ボールインスタンス
-		
+
 	// メインのループ処理
 	//----------------------------------------------------------------
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -52,10 +54,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 		}
 
-		pBall->Draw();
 		// そしてボールにはブロックのポインタ配列を渡しており、ボールのUpdateでforループをさせて
 		// ブロック配列にあるインスタンスを見に行き、座標を確認したり、サイズが書いているからそこから当たり判定をさせる。
-		pBall->Update(pBlocks);
+		//pBall->Update(pBlocks);
+		pBall->Draw();
+		player.Draw();
+		player.Update();
 
 		WaitTimer(50); // 待機時間
 		ScreenFlip();    // 画面を更新して、少し休む	

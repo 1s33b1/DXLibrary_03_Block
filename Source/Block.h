@@ -9,7 +9,7 @@ public:
 	int blockPosX, blockPosY; // ブロックのXY座標
 	const int width = 60; // 幅
 	const int height = 20; // 高さ
-	bool isExist = false; // true:壊れている
+	bool isExist = true; // true:表示されている
 private:
 	unsigned int color;
 	unsigned int colorR = 0; // 色

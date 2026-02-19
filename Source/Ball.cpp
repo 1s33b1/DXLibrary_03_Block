@@ -1,8 +1,7 @@
 #include "Ball.h"
 #include "Block.h"
+#include "../GameParameter.h"
 #include "DxLib.h"
-
-// ボールがぶつかった後ブロックの色が黒になるか検証
 
 // コンストラクタ
 Ball::Ball()
@@ -18,7 +17,7 @@ Ball::Ball()
 
 // 更新処理
 // ブロックのポインタ配列にはインスタンスをnewで生成したときに
-void Ball::Update(Block* pBlock[])
+void Ball::Update(Block* pBlock[], Player player)
 {
 	// 40個のブロックに対してチェック
 	for (int i = 0; i < 40; i++) {
@@ -33,32 +32,41 @@ void Ball::Update(Block* pBlock[])
 			ballPosy + radius > pBlock[i]->blockPosY &&
 			ballPosy - radius < pBlock[i]->blockPosY + pBlock[i]->height)
 		{
-			pBlock[i]->isExist == false; // 表示を消す
-			vx *= -1;
+			pBlock[i]->isExist = false; // 表示を消す
+			vy *= -1;
 			break; // 二個破壊させないように処理を終了させる
 		}
 	}
 
-	// それぞれの移動速度に壁にぶつかったとき用のvx,vyを掛ける
-	//ballPosx = ballSpeed * vx;
-	//ballPosy = ballSpeed * vy;
+	// プレイヤーに当たった時の処理を考えている
+	if (ballPosx + radius >(player.playerPosx1 || player.playerPosx1 + (player.player)) &&
+		ballPosx - radius < pBlock[i]->blockPosX + pBlock[i]->width &&
+		ballPosy + radius > pBlock[i]->blockPosY &&
+		ballPosy - radius < pBlock[i]->blockPosY + pBlock[i]->height)
+	{
 
-	// else ifだと1つのキーだけじゃないとダメだったからifに変更
-	if (CheckHitKey(KEY_INPUT_LEFT))
-	{
-		ballPosx -= ballSpeed;
 	}
-	if (CheckHitKey(KEY_INPUT_RIGHT))
-	{
-		ballPosx += ballSpeed;
+
+
+	// それぞれの移動速度に壁にぶつかったとき用のvx,vyを掛ける
+	ballPosx += ballSpeed * vx;
+	ballPosy += ballSpeed * vy;
+
+	// 壁(SetGraphModeで宣言した描画範囲)に当たった時の処理
+	// 左右のどちらかに当たった時
+	if (ballPosx >= ScreenSettings::screenWidth - radius) {
+		vx = -1;
 	}
-	if (CheckHitKey(KEY_INPUT_UP))
-	{
-		ballPosy -= ballSpeed;
+	else if (ballPosx <= 0 + radius) {
+		vx = 1;
 	}
-	if (CheckHitKey(KEY_INPUT_DOWN))
-	{
-		ballPosy += ballSpeed;
+
+	// 上下のどちらかに当たった時
+	if (ballPosy >= ScreenSettings::screenHeight - radius) {
+		vy = -1;
+	}
+	else if (ballPosy <= 0 + radius) {
+		vy = 1;
 	}
 }
 

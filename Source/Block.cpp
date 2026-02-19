@@ -9,27 +9,29 @@ Block::Block()
 
 void Block::Update(Block* pBlocks[])
 {
-	if (colorR >= 255 && !isExist) {
+	if (colorR >= 255 && isExist) {
 		colorR = 0;
 	}
-	if (colorG >= 255 && !isExist) {
+	if (colorG >= 255 && isExist) {
 		colorG = 0;
 	}
-	if (colorB >= 255 && !isExist) {
+	if (colorB >= 255 && isExist) {
 		colorB = 0;
 	}
-	color = GetColor(colorR, colorG, colorB);
-	colorR += 10;
-	colorG += 10;
-	colorB += 10;
 
 	// ボールが当たったときのその後の処理
-	if (isExist == true) {
+	if (isExist == false) {
 		// 今のところは黒色にして見えないようにしようとしてる
 		colorR = 0;
 		colorG = 0;
 		colorB = 0;
 	}
+	else {
+		colorR += 10;
+		colorG += 10;
+		colorB += 10;
+	}
+	color = GetColor(colorR, colorG, colorB); // 色の変更
 }
 
 void Block::Draw()

@@ -1,11 +1,12 @@
 #pragma once
 #include "Block.h"
+#include "Player.h"
 class Ball
 {
 public:
 	Ball();
 	void Draw();
-	void Update(Block* pBlock[]);
+	void Update(Block* pBlock[], Player player);
 private:
 	int ballPosx, ballPosy; // XYç¿ïW
 	int radius; // É{Å[ÉãÇÃîºåa

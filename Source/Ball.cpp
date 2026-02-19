@@ -17,13 +17,14 @@ Ball::Ball()
 
 // 更新処理
 // ブロックのポインタ配列にはインスタンスをnewで生成したときに
-void Ball::Update(Block* pBlock[], Player player)
+void Ball::Update(Block* pBlock[], Player* pPlayer)
 {
 	// 40個のブロックに対してチェック
 	for (int i = 0; i < 40; i++) {
 		if (pBlock[i]->isExist == false) continue; // すでにブロックが壊れていたらこれより下の処理に移行する
 
-		// もしボールの右端がブロックの左端より右にある且つ
+		// もし
+		// ボールの右端がブロックの左端より右にある且つ
 		// ボールの左端がブロックの右端より左にある且つ
 		// ボールの下端がブロックの上端より下にある且つ
 		// ボールの上端がブロックの下端より上にある時に以下の処理を行う
@@ -39,14 +40,13 @@ void Ball::Update(Block* pBlock[], Player player)
 	}
 
 	// プレイヤーに当たった時の処理を考えている
-	if (ballPosx + radius >(player.playerPosx1 || player.playerPosx1 + (player.player)) &&
-		ballPosx - radius < pBlock[i]->blockPosX + pBlock[i]->width &&
-		ballPosy + radius > pBlock[i]->blockPosY &&
-		ballPosy - radius < pBlock[i]->blockPosY + pBlock[i]->height)
+	if (ballPosx + radius > pPlayer->playerPosx1 &&
+		ballPosx - radius < pPlayer->playerPosx2 &&
+		ballPosy + radius > pPlayer->playerPosy1)
 	{
-
+		vy *= -1;
+		ballPosy = pPlayer->playerPosy1 - radius; // 反射をさせるときにボールの位置をプレイヤーの上にする
 	}
-
 
 	// それぞれの移動速度に壁にぶつかったとき用のvx,vyを掛ける
 	ballPosx += ballSpeed * vx;
